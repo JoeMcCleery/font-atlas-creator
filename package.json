@@ -1,0 +1,20 @@
+{
+  "name": "font-atlas-creator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist --nojekyll --cname atlas-creator.fearindigo.com.au",
+    "build-deploy": "yarn build && yarn deploy"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "font-atlas-sdf": "^2.0.0"
+  }
+}
