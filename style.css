@@ -26,13 +26,14 @@ body {
 }
 
 h1,
-canvas,
+#container,
 form {
   padding: 1rem;
 }
 
 #container {
   max-width: 100%;
+  text-align: center;
 }
 
 form {

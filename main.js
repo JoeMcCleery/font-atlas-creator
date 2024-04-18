@@ -35,11 +35,22 @@ const defaultOptions = {
 };
 
 function generateAtlas(options) {
+  // Generate
   options.step = [options.cellSize, options.cellSize];
   options.font.size = options.cellSize / 2.0;
   options.shape = getShape(options.chars.length, options.cellSize);
   canvas = fontAtlas(options);
   container.replaceChildren(canvas);
+  // Add resolution text
+  const resolutionText = document.createElement("p");
+  resolutionText.textContent = `Resolution: ${options.shape[0]} x ${options.shape[1]}`;
+  container.append(resolutionText);
+  // Add download link
+  var link = document.createElement("a");
+  link.download = "font-atlas.png";
+  link.href = canvas.toDataURL("image/png");
+  link.textContent = "Download Image";
+  container.append(link);
 }
 
 function getShape(count, cellSize) {
@@ -66,14 +77,4 @@ form.addEventListener("submit", (e) => {
     characters.value.replace(/ /g, "").split(",") || options.chars;
 
   generateAtlas(options);
-});
-
-const download = document.getElementById("download");
-download.addEventListener("click", (e) => {
-  e.preventDefault();
-  var link = document.createElement("a");
-  link.download = "font-atlas.png";
-  link.href = canvas.toDataURL();
-  link.click();
-  link.remove();
 });
