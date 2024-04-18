@@ -46,6 +46,7 @@ textarea {
 }
 
 #submit,
-#reset {
+#reset,
+#download {
   grid-column: span 2;
 }

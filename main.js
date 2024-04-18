@@ -1,6 +1,7 @@
 import fontAtlas from "font-atlas-sdf";
 
 const container = document.getElementById("container");
+let canvas;
 
 const defaultOptions = {
   font: {
@@ -37,8 +38,7 @@ function generateAtlas(options) {
   options.step = [options.cellSize, options.cellSize];
   options.font.size = options.cellSize / 2.0;
   options.shape = getShape(options.chars.length, options.cellSize);
-  console.log(options);
-  const canvas = fontAtlas(options);
+  canvas = fontAtlas(options);
   container.replaceChildren(canvas);
 }
 
@@ -48,6 +48,8 @@ function getShape(count, cellSize) {
   let x = count / y;
   return [x * cellSize, y * cellSize];
 }
+
+generateAtlas(defaultOptions);
 
 const form = document.getElementById("form");
 form.addEventListener("submit", (e) => {
@@ -66,6 +68,12 @@ form.addEventListener("submit", (e) => {
   generateAtlas(options);
 });
 
-function submit() {}
-
-generateAtlas(defaultOptions);
+const download = document.getElementById("download");
+download.addEventListener("click", (e) => {
+  e.preventDefault();
+  var link = document.createElement("a");
+  link.download = "font-atlas.png";
+  link.href = canvas.toDataURL();
+  link.click();
+  link.remove();
+});
